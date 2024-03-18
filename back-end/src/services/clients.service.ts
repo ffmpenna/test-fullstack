@@ -1,4 +1,4 @@
-import IClient from '../Interfaces/IClient';
+import IClient from '../interfaces/IClient';
 import { ClientsModel } from '../models';
 import {
   validateClient,

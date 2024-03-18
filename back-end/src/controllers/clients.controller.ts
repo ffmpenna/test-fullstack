@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ClientsService } from '../services';
-import IClient from '../Interfaces/IClient';
+import IClient from '../interfaces/IClient';
 
 export default class ClientsController {
   private clientsService: ClientsService;
