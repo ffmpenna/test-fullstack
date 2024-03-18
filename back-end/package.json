@@ -2,8 +2,9 @@
   "name": "teste-back-uol",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
+    "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fabio Penna",
