@@ -28,7 +28,7 @@ const verifyConflictingClientData = async (data: IClient, id?: number) => {
   );
 
   if (conflictData && conflictData.id !== id) {
-    return { status: 400, message: 'Email, CPF, or phone already exists' };
+    return { status: 409, message: 'Email, CPF, or phone already exists' };
   }
 };
 
