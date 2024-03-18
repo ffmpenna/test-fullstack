@@ -6,6 +6,8 @@ import ClientContext from '../../context/ClientContext';
 import ClientFormBody from './ClientFormBody';
 import ClientPrevClientData from './ClientPrevData';
 import api from '../../service/requests';
+import { phone as Phone } from 'phone';
+import {cpf as CPF} from 'cpf-cnpj-validator'
 
 export default function ClientForm({ page }) {
   const { id } = useParams();
@@ -32,13 +34,20 @@ export default function ClientForm({ page }) {
   // Envia as informções ao DB.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const requestBody = {
+      name:formsInfo.name,
+      email:formsInfo.email,
+      phone:Phone(formsInfo.phone, {country:'BR'}).phoneNumber,
+      cpf:CPF.strip(formsInfo.cpf),
+      status:formsInfo.status,
+    }
     try {
       // Diferencia a requisição de acordo com a página.
       if (page === 'create') {
-        await api.post('/', formsInfo);
+        await api.post('/', requestBody);
         alert('Usuário criado com sucesso!');
       } else if (page === 'edit') {
-        await api.put(`/${id}`, formsInfo);
+        await api.put(`/${id}`, requestBody);
         alert('Usuário editado com sucesso!');
       }
       navigate('/');

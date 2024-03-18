@@ -1,11 +1,16 @@
 // Formata números de telefone
-const formatNumber = (number) =>{
-  const cleaned = ('' + number).replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{2})(\d{4}|\d{5})(\d{4})$/);
-  if (match) {
-      return ['(', match[1], ')',' ', match[2], '-', match[3]].join('') // "(xx) xxxxx-xxxx" ou "(xx) xxxx-xxxx"
-  }
-  return '';
-}
+const formatNumber = (number) => {
+  const formatedNumber = number.replace(/\D/g, '').substring(2);
+
+  // Formata o número conforme (XX) XXXX-XXXX ou (XX) XXXXX-XXXX
+  return (
+    '(' +
+    formatedNumber.substring(0, 2) +
+    ') ' +
+    formatedNumber.substring(2, 6) +
+    '-' +
+    formatedNumber.substring(6)
+  );
+};
 
 export default formatNumber;
