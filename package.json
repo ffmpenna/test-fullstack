@@ -1,0 +1,28 @@
+{
+  "name": "teste-fullstack-uol",
+  "version": "1.0.0",
+  "description": "teste prático processo seletivo uol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "concurrently \"npm run prestart:frontend\" \"npm run prestart:backend\"",
+    "prestart:frontend": "cd ./front-end && npm install",
+    "prestart:backend": "cd ./back-end && npm install",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd ./front-end && npm run dev",
+    "start:backend": "cd ./back-end && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ffmpenna/test-fullstack.git"
+  },
+  "author": "Fabio Penna",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "bugs": {
+    "url": "https://github.com/ffmpenna/test-fullstack/issues"
+  },
+  "homepage": "https://github.com/ffmpenna/test-fullstack#readme"
+}
