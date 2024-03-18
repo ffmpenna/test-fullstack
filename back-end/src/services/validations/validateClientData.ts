@@ -15,7 +15,7 @@ const validateClientInputs = (data: IClient) => {
 const verifyExistingClient = async (id: number) => {
   const clientsModel = new ClientsModel();
   const existingClient = await clientsModel.getOne(id);
-  if (!existingClient) return { status: 400, message: 'Client does not exist' };
+  if (!existingClient) return { status: 404, message: 'Client does not exist' };
 };
 
 // Verifica se há algum dado único conflitante no banco de dados (email, cpf e telefone).
