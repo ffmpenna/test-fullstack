@@ -2,20 +2,23 @@ import IClient from '../../interfaces/IClient';
 import ClientsModel from '../../models/clients.model';
 import clientSchema from './schemas';
 
+// Valida as chaves do body da requisição.
 const validateClientInputs = (data: IClient) => {
-  const { error } = clientSchema.validate(data);
+  const { error } = clientSchema.validate(data); // Retorna um erro caso os dados forem inválidos.
   if (error) {
-    const status = Object.values(data).some((e) => e === undefined) ? 400 : 422;
+    const status = Object.values(data).some((e) => e === undefined) ? 400 : 422; // Se faltar alguma chave retorna Status 400, se não retorna 422.
     return { status, message: error.message };
   }
 };
 
+// Verifica se um cliente existe a partir do ID.
 const verifyExistingClient = async (id: number) => {
   const clientsModel = new ClientsModel();
   const existingClient = await clientsModel.getOne(id);
   if (!existingClient) return { status: 400, message: 'Client does not exist' };
 };
 
+// Verifica se há algum dado único conflitante no banco de dados (email, cpf e telefone).
 const verifyConflictingClientData = async (data: IClient, id?: number) => {
   const clientsModel = new ClientsModel();
   const conflictData = await clientsModel.getByEmailCpfOrPhone(
@@ -29,6 +32,7 @@ const verifyConflictingClientData = async (data: IClient, id?: number) => {
   }
 };
 
+// Executa as validações acima.
 const validateClient = async (data: IClient, id?: number) => {
   const validationError = validateClientInputs(data);
   if (validationError) return validationError;
@@ -37,6 +41,7 @@ const validateClient = async (data: IClient, id?: number) => {
   if (existingClientError) return existingClientError;
 };
 
+// Executa as validações referentes ao update de cliente.
 const validateUptadeClient = async (data: IClient, id: number) => {
   const existingClientError = await verifyExistingClient(id);
   if (existingClientError) return existingClientError;

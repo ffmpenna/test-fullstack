@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+// Esquema de validações de dados usando a biblioteca JOI 
 const clientSchema = Joi.object({
   name: Joi.string().min(3).label('name').required(),
   email: Joi.string()

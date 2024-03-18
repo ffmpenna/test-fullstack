@@ -2,12 +2,15 @@ import sqlite3 from 'sqlite3';
 import db from './DB/configDB';
 import IClient from '../interfaces/IClient';
 
+// Model das requisições da rota "/clients"
 export default class ClientsModel {
-  private database: sqlite3.Database;
+  private database: sqlite3.Database; // Banco de dados Sqlite
 
   constructor() {
     this.database = db;
   }
+
+  // ============== Conjunto das controllers de clientes ================== //
 
   async getAll(): Promise<IClient[]> {
     return new Promise<IClient[]>((resolve, reject) => {
@@ -60,7 +63,7 @@ export default class ClientsModel {
           if (err) {
             reject(err);
           } else {
-            resolve(this.lastID);
+            resolve(this.lastID); // Retorna o ID do cliente inserido.
           }
         }
       );
@@ -82,7 +85,7 @@ export default class ClientsModel {
           if (err) {
             reject(err);
           } else {
-            resolve(id);
+            resolve(id); // Retorna o ID do cliente atualizado.
           }
         }
       );
